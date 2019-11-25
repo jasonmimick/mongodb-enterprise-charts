@@ -1,0 +1,21 @@
+{{ if eq .Values.opsManager.enable true}}
+---
+apiVersion: mongodb.com/v1
+kind: MongoDBOpsManager
+metadata:
+  name: {{ .Release.Name }}-ops-manager
+spec:
+  version: {{ .Values.opsManager.version }}
+  adminCredentials: {{ .Release.Name}}-ops-manager-secret
+  configuration:
+    mms.fromemailaddr: {{ .Values.opsManager.adminCredentials.Email }}
+
+  applicationDatabase:
+    members: 3
+    version: 4.2.0
+    persistent: true
+    type: ReplicaSet
+    podSpec:
+      cpu: '0.25'
+{{end}}
+

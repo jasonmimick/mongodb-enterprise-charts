@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-cloud-manager-config
+  namespace: {{ .Release.Namespace }}
+data:
+  projectName: {{ .Release.Name }} 
+  baseUrl: https://cloud.mongodb.com
+  orgId: {{ .Values.cloudManager.orgId }} 
+  credentials: {{ .Release.Name }}-cloud-manager-secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-cloud-manager-secret
+  namespace: {{ .Release.Namespace }}
+stringData:
+  user: {{ .Values.cloudManager.publicApiKey }}
+  publicApiKey: {{ .Values.cloudManager.privateApiKey }}
+  #publicApiKey: {{ .Values.cloudManager.publicApiKey }}
+  #privateApiKey: {{ .Values.cloudManager.privateApiKey }}
+
