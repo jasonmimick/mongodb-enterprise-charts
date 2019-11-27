@@ -1,0 +1,26 @@
+---
+apiVersion: mongodb.com/v1
+kind: MongoDB
+metadata:
+  name: {{ .Values.mongodbCluster.name }}
+spec:
+  version: {{ .Values.mongodbCluster.version }}
+  service: {{ .Values.mongodbCluster.service }}
+
+  featureCompatibilityVersion: "4.0"
+
+  cloudManager:
+    configMapRef:
+      name: {{ .Values.cloudManager.projectName }}-cloud-manager-config
+  credentials: {{ .Values.cloudManager.projectName }}-cloud-manager-secret
+  type: {{ .Values.mongodbCluster.type }}
+
+  persistent: true
+  podSpec:
+    cpu: {{ .Values.mongodbCluster.podSpec.cpu }}
+    memory: {{ .Values.mongodbCluster.podSpec.memory }}
+    persistence:
+      single:
+        storage: {{ .Values.mongodbCluster.podSpec.storage }}
+        storageClass: {{ .Values.mongodbCluster.podSpec.storageClass }}
+

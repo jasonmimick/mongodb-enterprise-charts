@@ -1,0 +1,19 @@
+# Default values for mongodb-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+version: 4.0.0
+persistent: true
+podSpec:
+  cpu: '0.25'
+  memory: 512M
+  storage: 12G
+  storageClass: standard
+
+cloudManager:
+  publicApiKey: vqcivyid
+  privateApiKey: 37726068-f740-4622-9e86-8e46f7a4c834
+  orgId: 5dc97dd1cf09a2535465a5f8     # easy-k8s
+
+
+
